@@ -5,7 +5,10 @@ Optimization software intended for use with Growtopia
 Growtopia tends to consume lots of CPU power while idle. Thus, it could to give the CPU some more time by sleeping.
 
 ## Usage
-You have to patch Growtopia to load kernel34.dll instead of kernel32.dll by using a hex editor. It's just a find and replace operation
+You have to patch Growtopia to load kernel34.dll instead of kernel32.dll by using this handy find & replace one-liner in Powershell:
+```powershell
+[IO.File]::WriteAllText("$Env:localappdata\Growtopia\Growtopia-Kernel34.exe", [IO.File]::ReadAllText("$Env:localappdata\Growtopia\Growtopia.exe",[Text.Encoding]::GetEncoding("iso-8859-1")).Replace("kernel32","kernel34").Replace("Kernel32","Kernel34").Replace("KERNEL32","KERNEL34"),[Text.Encoding]::GetEncoding("iso-8859-1"))
+```
 The project is maintained as a Visual Studio 2022 project. It should be pretty easy to get up and running.
 If any issues arise, please let me know.
 
